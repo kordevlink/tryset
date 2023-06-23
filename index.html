@@ -15,10 +15,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans" rel="stylesheet">
 
-
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-
 <style type="text/css">
 </style>
 
@@ -26,12 +22,37 @@
 
 $(document).ready(function(){
 	console.log('123');
+	get_data();
 });
 
+function get_data()
+{
+	const target_url = 'http://os1.831123.xyz/tryset/show';
+	$.ajax({
+		url: target_url,
+		dataType: 'jsonp',
+		jsonpCallback: "none",
+		success: function(data) {
+			//
+			console.log(data);
+			data.result.forEach(function(line) {
+				//console.log(line);
+				$('#target').append(line.reg_date+' : '+ line.param1 +' / <br />');
+			});
+
+		},
+		error: function(xhr) {
+			console.log('error');
+			console.log(xhr);
+		}
+	});
+}
 </script>
 
 </head>
 <body>
-TEST / TEST / TEST 2
+TEST / TEST / TEST 2 <br />
+<div id="target">
+</div>
 </body>
 </html>
